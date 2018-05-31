@@ -115,6 +115,12 @@ module.exports = function(grunt) {
                 pushTo: 'upstream',
                 gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d'
             }
+        },
+        watch: {
+            js: {
+                files: ['widget.js', 'dev/*.js'],
+                tasks: ['concat:dist']
+            }
         }
     });
 
