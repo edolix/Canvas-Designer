@@ -766,70 +766,81 @@ window.addEventListener('load', function() {
         });
     }
 
-    decorateAdditionalOptions();
+    if (tools.additional === true) {
+        decorateAdditionalOptions();
+    } else document.getElementById('additional').style.display = 'none';
 
-    var designPreview = find('design-preview'),
-        codePreview = find('code-preview');
+    function decoratePreviewAndCode() {
+        var designPreview = find('design-preview'),
+            codePreview = find('code-preview');
 
-    // todo: use this function in share-drawings.js
-    // to sync buttons' states
-    window.selectBtn = function(btn, isSkipWebRTCMessage) {
-        codePreview.className = designPreview.className = '';
+        // todo: use this function in share-drawings.js
+        // to sync buttons' states
+        window.selectBtn = function(btn, isSkipWebRTCMessage) {
+            codePreview.className = designPreview.className = '';
 
-        if (btn == designPreview) designPreview.className = 'preview-selected';
-        else codePreview.className = 'preview-selected';
+            if (btn == designPreview) designPreview.className = 'preview-selected';
+            else codePreview.className = 'preview-selected';
 
-        if (!isSkipWebRTCMessage && window.connection && connection.numberOfConnectedUsers >= 1) {
-            connection.send({
-                btnSelected: btn.id
-            });
-        } else {
-            // to sync buttons' UI-states
-            if (btn == designPreview) btnDesignerPreviewClicked();
-            else btnCodePreviewClicked();
+            if (!isSkipWebRTCMessage && window.connection && connection.numberOfConnectedUsers >= 1) {
+                connection.send({
+                    btnSelected: btn.id
+                });
+            } else {
+                // to sync buttons' UI-states
+                if (btn == designPreview) btnDesignerPreviewClicked();
+                else btnCodePreviewClicked();
+            }
+        };
+
+        addEvent(designPreview, 'click', function() {
+            selectBtn(designPreview);
+            btnDesignerPreviewClicked();
+        });
+
+        function btnDesignerPreviewClicked() {
+            codeText.parentNode.style.display = 'none';
+            optionsContainer.style.display = 'none';
+
+            hideContainers();
+            endLastPath();
         }
-    };
 
-    addEvent(designPreview, 'click', function() {
-        selectBtn(designPreview);
-        btnDesignerPreviewClicked();
-    });
+        addEvent(codePreview, 'click', function() {
+            selectBtn(codePreview);
+            btnCodePreviewClicked();
+        });
 
-    function btnDesignerPreviewClicked() {
-        codeText.parentNode.style.display = 'none';
-        optionsContainer.style.display = 'none';
+        function btnCodePreviewClicked() {
+            codeText.parentNode.style.display = 'block';
+            optionsContainer.style.display = 'block';
 
-        hideContainers();
-        endLastPath();
+            codeText.focus();
+            common.updateTextArea();
+
+            setHeightForCodeAndOptionsContainer();
+
+            hideContainers();
+            endLastPath();
+        }
+
+        var codeText = find('code-text'),
+            optionsContainer = find('options-container');
+
+        function setHeightForCodeAndOptionsContainer() {
+            codeText.style.width = (innerWidth - optionsContainer.clientWidth - 30) + 'px';
+            codeText.style.height = (innerHeight - 40) + 'px';
+
+            codeText.style.marginLeft = (optionsContainer.clientWidth) + 'px';
+            optionsContainer.style.height = (innerHeight) + 'px';
+        }
     }
 
-    addEvent(codePreview, 'click', function() {
-        selectBtn(codePreview);
-        btnCodePreviewClicked();
-    });
-
-    function btnCodePreviewClicked() {
-        codeText.parentNode.style.display = 'block';
-        optionsContainer.style.display = 'block';
-
-        codeText.focus();
-        common.updateTextArea();
-
-        setHeightForCodeAndOptionsContainer();
-
-        hideContainers();
-        endLastPath();
-    }
-
-    var codeText = find('code-text'),
-        optionsContainer = find('options-container');
-
-    function setHeightForCodeAndOptionsContainer() {
-        codeText.style.width = (innerWidth - optionsContainer.clientWidth - 30) + 'px';
-        codeText.style.height = (innerHeight - 40) + 'px';
-
-        codeText.style.marginLeft = (optionsContainer.clientWidth) + 'px';
-        optionsContainer.style.height = (innerHeight) + 'px';
+    if (tools.previewAndCode === true) {
+        decoratePreviewAndCode();
+    } else {
+        document.getElementById('design-preview').style.display = 'none';
+        document.getElementById('code-preview').style.display = 'none';
     }
 
     var isAbsolute = find('is-absolute-points'),

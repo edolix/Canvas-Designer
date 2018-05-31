@@ -3,6 +3,9 @@ var drawHelper = {
         tempContext.clearRect(0, 0, innerWidth, innerHeight);
         context.clearRect(0, 0, innerWidth, innerHeight);
 
+        context.fillStyle = "#FFFFFF";
+        context.fillRect(0, 0, context.canvas.width, context.canvas.height);
+
         var i, point, length = points.length;
         for (i = 0; i < length; i++) {
             point = points[i];
@@ -95,6 +98,9 @@ var drawHelper = {
         context.fillText(point[0].substr(1, point[0].length - 2), point[1], point[2]);
     },
     arc: function(context, point, options) {
+        if (parseFloat(point[2]) < 0) {
+            return
+        }
         context.beginPath();
         context.arc(point[0], point[1], point[2], point[3], 0, point[4]);
 

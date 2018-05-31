@@ -25,7 +25,10 @@ function CanvasDesigner() {
         quadratic: true,
         text: true,
         image: true,
-        marker: true
+        marker: true,
+        zoom: false, // FIXME
+        additional: false,
+        previewAndCode: false,
     };
 
     var selectedIcon = 'pencil';
@@ -46,7 +49,7 @@ function CanvasDesigner() {
         if (!event.data || event.data.uid !== designer.uid) return;
 
         if(!!event.data.sdp) {
-            webrtcHandler.createAnswer(event.data, function(response) {
+            window.webrtcHandler.createAnswer(event.data, function(response) {
                 if(response.sdp) {
                     designer.postMessage(response);
                     return;
