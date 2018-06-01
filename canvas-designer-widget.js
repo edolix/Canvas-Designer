@@ -87,12 +87,17 @@ function CanvasDesigner() {
 
     designer.uid = getRandomString();
 
-    designer.appendTo = function(parentNode) {
+    designer.appendTo = function(parentNode, callback) {
         designer.iframe = document.createElement('iframe');
         designer.iframe.src = designer.widgetHtmlURL + '?widgetJsURL=' + designer.widgetJsURL + '&tools=' + JSON.stringify(tools) + '&selectedIcon=' + selectedIcon;
         designer.iframe.style.width = '100%';
         designer.iframe.style.height = '100%';
         designer.iframe.style.border = 0;
+        designer.iframe.onload = function () {
+            if (typeof callback === 'function') {
+                callback()
+            }
+        };
 
         window.removeEventListener('message', onMessage);
         window.addEventListener('message', onMessage, false);
