@@ -46,7 +46,8 @@ function CanvasDesigner() {
     var captureStreamCallback = function() {};
 
     function onMessage(event) {
-        if (!event.data || event.data.uid !== designer.uid) return;
+        // if (!event.data || event.data.uid !== designer.uid) return;
+        if (!event.data) return;
 
         if(!!event.data.sdp) {
             window.webrtcHandler.createAnswer(event.data, function(response) {
