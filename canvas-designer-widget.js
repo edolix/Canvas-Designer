@@ -125,9 +125,10 @@ function CanvasDesigner() {
     };
 
     designer.setSelected = function(icon) {
-        if (typeof tools[icon] !== 'undefined') {
+        // if (typeof tools[icon] !== 'undefined') {
+            console.log('setSelected', tools, icon)
             selectedIcon = icon;
-        }
+        // }
     };
 
     designer.toDataURL = function(format, callback) {

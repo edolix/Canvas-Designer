@@ -1,4 +1,4 @@
-// Last time updated: 2018-06-04 9:16:52 AM UTC
+// Last time updated: 2018-06-04 10:32:56 AM UTC
 
 // _______________
 // Canvas-Designer
@@ -2414,7 +2414,9 @@ var tools = {
     quadratic: true,
     text: true,
     image: true,
-    zoom: true
+    zoom: true,
+    lineWidth: true,
+    colors: true
 };
 
 if (params.tools) {
@@ -3092,7 +3094,9 @@ window.addEventListener('load', function() {
         });
     }
 
-    decorateLineWidth();
+    if (tools.lineWidth === true) {
+        decorateLineWidth();
+    } else document.getElementById('line-width').style.display = 'none';
 
     function decorateColors() {
         var context = getContext('colors');
@@ -3130,7 +3134,9 @@ window.addEventListener('load', function() {
         });
     }
 
-    decorateColors();
+    if (tools.colors === true) {
+        decorateColors();
+    } else document.getElementById('colors').style.display = 'none';
 
     function decorateAdditionalOptions() {
         var context = getContext('additional');
