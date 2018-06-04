@@ -24,7 +24,7 @@ function CanvasDesigner() {
         bezier: true,
         quadratic: true,
         text: true,
-        image: true,
+        image: false,
         marker: true,
         zoom: false, // FIXME
         additional: false,
