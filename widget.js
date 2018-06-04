@@ -1,4 +1,4 @@
-// Last time updated: 2018-06-04 10:32:56 AM UTC
+// Last time updated: 2018-06-04 1:25:00 PM UTC
 
 // _______________
 // Canvas-Designer
@@ -81,7 +81,17 @@ function getContext(id) {
 
     return ctx;
 }
-
+/*
+window.onresize = function () {
+    console.log('ONRESIZE YO')
+    var main = find('main-canvas')
+    main.setAttribute('width', window.innerWidth)
+    main.setAttribute('height', window.innerHeight)
+    var temp = find('temp-canvas')
+    temp.setAttribute('width', window.innerWidth)
+    temp.setAttribute('height', window.innerHeight)
+}
+*/
 var context = getContext('main-canvas'),
     tempContext = getContext('temp-canvas');
 

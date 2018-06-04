@@ -70,7 +70,17 @@ function getContext(id) {
 
     return ctx;
 }
-
+/*
+window.onresize = function () {
+    console.log('ONRESIZE YO')
+    var main = find('main-canvas')
+    main.setAttribute('width', window.innerWidth)
+    main.setAttribute('height', window.innerHeight)
+    var temp = find('temp-canvas')
+    temp.setAttribute('width', window.innerWidth)
+    temp.setAttribute('height', window.innerHeight)
+}
+*/
 var context = getContext('main-canvas'),
     tempContext = getContext('temp-canvas');
 
