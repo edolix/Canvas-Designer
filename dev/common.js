@@ -1,3 +1,7 @@
+var _opts = options;
+if (!_opts.hasOwnProperty('callbacks')) {
+    _opts.callbacks = {}
+}
 var is = {
     isLine: false,
     isArrow: false,
@@ -60,8 +64,10 @@ function getContext(id) {
     var canv = find(id),
         ctx = canv.getContext('2d');
 
-    canv.setAttribute('width', innerWidth);
-    canv.setAttribute('height', innerHeight);
+    console.log($('#webRTCBoard').width())
+    console.log($('#webRTCBoard').height())
+    canv.setAttribute('width', $('#webRTCBoard').width());
+    canv.setAttribute('height', $('#webRTCBoard').height());
 
     ctx.lineWidth = lineWidth;
     ctx.strokeStyle = strokeStyle;
@@ -554,6 +560,7 @@ function endLastPath() {
     else if (cache.isQuadraticCurve) quadraticHandler.end();
     else if (cache.isBezierCurve) bezierHandler.end();
 
+    console.log('endLastPath ???')
     drawHelper.redraw();
 
     if (textHandler.text && textHandler.text.length) {

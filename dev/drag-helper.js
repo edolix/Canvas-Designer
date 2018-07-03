@@ -16,8 +16,8 @@ var dragHelper = {
         var dHelper = dragHelper,
             g = dHelper.global;
 
-        var x = e.pageX - canvas.offsetLeft,
-            y = e.pageY - canvas.offsetTop;
+        var x = e.offsetX,
+            y = e.offsetY;
 
         g.prevX = x;
         g.prevY = y;
@@ -137,8 +137,8 @@ var dragHelper = {
         g.ismousedown = false;
     },
     mousemove: function(e) {
-        var x = e.pageX - canvas.offsetLeft,
-            y = e.pageY - canvas.offsetTop,
+        var x = e.offsetX,
+            y = e.offsetY,
             g = this.global;
 
         drawHelper.redraw();

@@ -4,37 +4,20 @@ var arrowHandler = {
     prevY: 0,
     arrowSize: 10,
     mousedown: function(e) {
-        var x = e.pageX - canvas.offsetLeft,
-            y = e.pageY - canvas.offsetTop;
-
-        var t = this;
-
-        t.prevX = x;
-        t.prevY = y;
-
-        t.ismousedown = true;
+        this.prevX = e.offsetX;
+        this.prevY = e.offsetY;
+        this.ismousedown = true;
     },
     mouseup: function(e) {
-        var x = e.pageX - canvas.offsetLeft,
-            y = e.pageY - canvas.offsetTop;
-
-        var t = this;
-        if (t.ismousedown) {
-            points[points.length] = ['arrow', [t.prevX, t.prevY, x, y], drawHelper.getOptions()];
-
-            t.ismousedown = false;
+        if (this.ismousedown) {
+            points[points.length] = ['arrow', [this.prevX, this.prevY, e.offsetX, e.offsetY], drawHelper.getOptions()];
+            this.ismousedown = false;
         }
     },
     mousemove: function(e) {
-        var x = e.pageX - canvas.offsetLeft,
-            y = e.pageY - canvas.offsetTop;
-
-        var t = this;
-
-        if (t.ismousedown) {
+        if (this.ismousedown) {
             tempContext.clearRect(0, 0, innerWidth, innerHeight);
-
-            drawHelper.arrow(tempContext, [t.prevX, t.prevY, x, y]);
+            drawHelper.arrow(tempContext, [this.prevX, this.prevY, e.offsetX, e.offsetY]);
         }
     }
 };

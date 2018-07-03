@@ -3,43 +3,36 @@ var markerHandler = {
     prevX: 0,
     prevY: 0,
     mousedown: function(e) {
-        var x = e.pageX - canvas.offsetLeft,
-            y = e.pageY - canvas.offsetTop;
+        var x = e.offsetX,
+            y = e.offsetY;
+        this.prevX = x;
+        this.prevY = y;
 
-        var t = this;
+        this.ismousedown = true;
 
-        t.prevX = x;
-        t.prevY = y;
-
-        t.ismousedown = true;
-
-        // make sure that pencil is drawing shapes even 
-        // if mouse is down but mouse isn't moving
+        // make sure that pencil is drawing shapes even if mouse is down but mouse isn't moving
         tempContext.lineCap = 'round';
-        markerDrawHelper.line(tempContext, [t.prevX, t.prevY, x, y]);
+        markerDrawHelper.line(tempContext, [this.prevX, this.prevY, x, y]);
 
-        points[points.length] = ['line', [t.prevX, t.prevY, x, y], markerDrawHelper.getOptions()];
+        points[points.length] = ['line', [this.prevX, this.prevY, x, y], markerDrawHelper.getOptions()];
 
-        t.prevX = x;
-        t.prevY = y;
+        this.prevX = x;
+        this.prevY = y;
     },
     mouseup: function(e) {
         this.ismousedown = false;
     },
     mousemove: function(e) {
-        var x = e.pageX - canvas.offsetLeft,
-            y = e.pageY - canvas.offsetTop;
-
-        var t = this;
-
-        if (t.ismousedown) {
+        var x = e.offsetX,
+            y = e.offsetY;
+        if (this.ismousedown) {
             tempContext.lineCap = 'round';
-            markerDrawHelper.line(tempContext, [t.prevX, t.prevY, x, y]);
+            markerDrawHelper.line(tempContext, [this.prevX, this.prevY, x, y]);
 
-            points[points.length] = ['line', [t.prevX, t.prevY, x, y], markerDrawHelper.getOptions()];
+            points[points.length] = ['line', [this.prevX, this.prevY, x, y], markerDrawHelper.getOptions()];
 
-            t.prevX = x;
-            t.prevY = y;
+            this.prevX = x;
+            this.prevY = y;
         }
     }
 }

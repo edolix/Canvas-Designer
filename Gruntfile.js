@@ -23,7 +23,6 @@ module.exports = function(grunt) {
                 src: [
                     'dev/head.js',
                     'dev/common.js',
-
                     'dev/draw-helper.js',
                     'dev/drag-helper.js',
                     'dev/pencil-handler.js',
@@ -39,14 +38,10 @@ module.exports = function(grunt) {
                     'dev/zoom-handler.js',
                     'dev/file-selector.js',
                     'dev/image-handler.js',
-
                     'dev/decorator.js',
                     'dev/events-handler.js',
-
                     'dev/share-drawings.js',
-                    'dev/webrtc-handler.js',
-                    'dev/canvas-designer-widget.js',
-
+                    // 'dev/webrtc-handler.js',
                     'dev/tail.js'
                 ],
                 dest: 'widget.js',

@@ -3,41 +3,37 @@ var eraserHandler = {
     prevX: 0,
     prevY: 0,
     mousedown: function(e) {
-        var x = e.pageX - canvas.offsetLeft,
-            y = e.pageY - canvas.offsetTop;
+        var x = e.offsetX,
+            y = e.offsetY;
 
-        var t = this;
+        this.prevX = x;
+        this.prevY = y;
 
-        t.prevX = x;
-        t.prevY = y;
-
-        t.ismousedown = true;
+        this.ismousedown = true;
 
         tempContext.lineCap = 'round';
-        drawHelper.line(tempContext, [t.prevX, t.prevY, x, y]);
+        drawHelper.line(tempContext, [this.prevX, this.prevY, x, y]);
 
-        points[points.length] = ['line', [t.prevX, t.prevY, x, y], drawHelper.getOptions()];
+        points[points.length] = ['line', [this.prevX, this.prevY, x, y], drawHelper.getOptions()];
 
-        t.prevX = x;
-        t.prevY = y;
+        this.prevX = x;
+        this.prevY = y;
     },
     mouseup: function(e) {
         this.ismousedown = false;
     },
     mousemove: function(e) {
-        var x = e.pageX - canvas.offsetLeft,
-            y = e.pageY - canvas.offsetTop;
+        var x = e.offsetX,
+            y = e.offsetY;
 
-        var t = this;
-
-        if (t.ismousedown) {
+        if (this.ismousedown) {
             tempContext.lineCap = 'round';
-            drawHelper.line(tempContext, [t.prevX, t.prevY, x, y]);
+            drawHelper.line(tempContext, [this.prevX, this.prevY, x, y]);
 
-            points[points.length] = ['line', [t.prevX, t.prevY, x, y], drawHelper.getOptions()];
+            points[points.length] = ['line', [this.prevX, this.prevY, x, y], drawHelper.getOptions()];
 
-            t.prevX = x;
-            t.prevY = y;
+            this.prevX = x;
+            this.prevY = y;
         }
     }
 };

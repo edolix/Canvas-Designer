@@ -2,10 +2,7 @@ var canvas = tempContext.canvas,
     isTouch = 'createTouch' in document;
 
 addEvent(canvas, isTouch ? 'touchstart mousedown' : 'mousedown', function(e) {
-    if (isTouch) e = e.pageX ? e : e.touches.length ? e.touches[0] : {
-        pageX: 0,
-        pageY: 0
-    };
+    if (isTouch) e = e.pageX ? e : e.touches.length ? e.touches[0] : { offsetX: 0, offsetY: 0 };
 
     var cache = is;
 
@@ -48,10 +45,7 @@ addEvent(canvas, isTouch ? 'touchend touchcancel mouseup' : 'mouseup', function(
         } else if (e && e.changedTouches && e.changedTouches.length) {
             e = e.changedTouches[0];
         } else {
-            e = {
-                pageX: 0,
-                pageY: 0
-            }
+            e = { offsetX: 0, offsetY: 0 }
         }
     }
 
@@ -78,10 +72,7 @@ addEvent(canvas, isTouch ? 'touchend touchcancel mouseup' : 'mouseup', function(
 });
 
 addEvent(canvas, isTouch ? 'touchmove mousemove' : 'mousemove', function(e) {
-    if (isTouch) e = e.pageX ? e : e.touches.length ? e.touches[0] : {
-        pageX: 0,
-        pageY: 0
-    };
+    if (isTouch) e = e.pageX ? e : e.touches.length ? e.touches[0] : { offsetX: 0, offsetY: 0 };
 
     var cache = is;
 

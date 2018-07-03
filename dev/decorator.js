@@ -1,28 +1,49 @@
+// var tools = {
+//     line: true,
+//     arrow: true,
+//     pencil: true,
+//     marker: true,
+//     dragSingle: true,
+//     dragMultiple: true,
+//     eraser: true,
+//     rectangle: true,
+//     arc: true,
+//     bezier: true,
+//     quadratic: true,
+//     text: true,
+//     image: true,
+//     zoom: true,
+//     lineWidth: true,
+//     colors: true
+// };
+if (!window.hasOwnProperty('selectedIcon')) {
+    window.selectedIcon = 'Pencil'
+}
 var tools = {
+    dragMultiple: true,
     line: true,
     arrow: true,
     pencil: true,
-    marker: true,
-    dragSingle: true,
-    dragMultiple: true,
+    dragSingle: false,
     eraser: true,
     rectangle: true,
     arc: true,
     bezier: true,
     quadratic: true,
     text: true,
-    image: true,
-    zoom: true,
-    lineWidth: true,
-    colors: true
+    image: false,
+    marker: true,
+    zoom: false, // FIXME
+    additional: false,
+    previewAndCode: false,
 };
 
-if (params.tools) {
-    try {
-        var t = JSON.parse(params.tools);
-        tools = t;
-    } catch (e) {}
-}
+// if (params.tools) {
+//     try {
+//         var t = JSON.parse(params.tools);
+//         tools = t;
+//     } catch (e) {}
+// }
 
 function setSelection(element, prop) {
     endLastPath();
@@ -202,16 +223,16 @@ window.addEventListener('load', function() {
     function decorateDragAllPaths() {
         var context = getContext('drag-all-paths');
 
-        var x = 10,
-            y = 6,
+        var x = 7,
+            y = 8,
             line = "line",
             points = [
                 [line, x, y, x + 5, y + 27],
                 [line, x, y, x + 18, y + 19],
                 [line, x + 17, y + 19, x + 9, y + 20],
                 [line, x + 9, y + 20, x + 5, y + 27],
-                [line, x + 16, y + 22, x + 16, y + 31],
-                [line, x + 12, y + 27, x + 20, y + 27]
+                // [line, x + 16, y + 22, x + 16, y + 31],
+                // [line, x + 12, y + 27, x + 20, y + 27]
             ],
             length = points.length,
             point, i;
@@ -230,7 +251,7 @@ window.addEventListener('load', function() {
 
         context.fillStyle = 'Gray';
         context.font = '10px Verdana';
-        context.fillText('All', 20, 12);
+        context.fillText('Drag', 14, 12);
 
         bindEvent(context, 'DragAllPaths');
     }

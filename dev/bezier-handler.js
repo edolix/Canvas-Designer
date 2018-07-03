@@ -16,8 +16,8 @@ var bezierHandler = {
     mousedown: function(e) {
         var g = this.global;
 
-        var x = e.pageX - canvas.offsetLeft,
-            y = e.pageY - canvas.offsetTop;
+        var x = e.offsetX,
+            y = e.offsetY;
 
         if (!g.isLastStep && !g.isSecondStep) {
             g.prevX = x;
@@ -41,8 +41,8 @@ var bezierHandler = {
     mouseup: function(e) {
         var g = this.global;
 
-        var x = e.pageX - canvas.offsetLeft,
-            y = e.pageY - canvas.offsetTop;
+        var x = e.offsetX,
+            y = e.offsetY;
 
         if (g.ismousedown && g.isFirstStep) {
             g.firstControlPointX = x;
@@ -53,8 +53,8 @@ var bezierHandler = {
         }
     },
     mousemove: function(e) {
-        var x = e.pageX - canvas.offsetLeft,
-            y = e.pageY - canvas.offsetTop;
+        var x = e.offsetX,
+            y = e.offsetY;
 
         var g = this.global;
 

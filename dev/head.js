@@ -5,4 +5,4 @@
 
 'use strict';
 
-(function() {
+function WhiteBoard(options) {

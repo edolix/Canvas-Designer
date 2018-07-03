@@ -11,8 +11,8 @@ var quadraticHandler = {
     mousedown: function(e) {
         var g = this.global;
 
-        var x = e.pageX - canvas.offsetLeft,
-            y = e.pageY - canvas.offsetTop;
+        var x = e.offsetX,
+            y = e.offsetY;
 
         if (!g.isLastStep) {
             g.prevX = x;
@@ -28,8 +28,8 @@ var quadraticHandler = {
     mouseup: function(e) {
         var g = this.global;
 
-        var x = e.pageX - canvas.offsetLeft,
-            y = e.pageY - canvas.offsetTop;
+        var x = e.offsetX,
+            y = e.offsetY;
 
         if (g.ismousedown && g.isFirstStep) {
             g.controlPointX = x;
@@ -40,8 +40,8 @@ var quadraticHandler = {
         }
     },
     mousemove: function(e) {
-        var x = e.pageX - canvas.offsetLeft,
-            y = e.pageY - canvas.offsetTop;
+        var x = e.offsetX,
+            y = e.offsetY;
 
         var g = this.global;
 

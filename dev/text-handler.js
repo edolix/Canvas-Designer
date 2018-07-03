@@ -1,7 +1,7 @@
 var textHandler = {
     text: '',
     selectedFontFamily: 'Arial',
-    selectedFontSize: '15',
+    selectedFontSize: '25',
     onShapeSelected: function() {
         tempContext.canvas.style.cursor = 'text';
         this.x = this.y = this.pageX = this.pageY = 0;
@@ -87,11 +87,11 @@ var textHandler = {
         textHandler.x = textHandler.y = 0;
         textHandler.text = '';
 
-        textHandler.pageX = e.pageX;
-        textHandler.pageY = e.pageY;
+        textHandler.pageX = e.offsetX;
+        textHandler.pageY = e.offsetY;
 
-        textHandler.x = e.pageX - canvas.offsetLeft - 5;
-        textHandler.y = e.pageY - canvas.offsetTop + 10;
+        textHandler.x = e.offsetX - 5;
+        textHandler.y = e.offsetY + 10;
 
         if (typeof textHandler.blinkCursorInterval !== 'undefined') {
             clearInterval(textHandler.blinkCursorInterval);

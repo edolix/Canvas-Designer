@@ -3,43 +3,25 @@ var pencilHandler = {
     prevX: 0,
     prevY: 0,
     mousedown: function(e) {
-        var x = e.pageX - canvas.offsetLeft,
-            y = e.pageY - canvas.offsetTop;
-
-        var t = this;
-
-        t.prevX = x;
-        t.prevY = y;
-
-        t.ismousedown = true;
-
-        // make sure that pencil is drawing shapes even 
-        // if mouse is down but mouse isn't moving
+        this.ismousedown = true;
+        this.prevX = e.offsetX;
+        this.prevY = e.offsetY;
         tempContext.lineCap = 'round';
-        pencilDrawHelper.line(tempContext, [t.prevX, t.prevY, x, y]);
-
-        points[points.length] = ['line', [t.prevX, t.prevY, x, y], pencilDrawHelper.getOptions()];
-
-        t.prevX = x;
-        t.prevY = y;
+        pencilDrawHelper.line(tempContext, [this.prevX, this.prevY, e.offsetX, e.offsetY]);
+        points[points.length] = ['line', [this.prevX, this.prevY, e.offsetX, e.offsetY], pencilDrawHelper.getOptions()];
+        this.prevX = e.offsetX;
+        this.prevY = e.offsetY;
     },
     mouseup: function(e) {
         this.ismousedown = false;
     },
     mousemove: function(e) {
-        var x = e.pageX - canvas.offsetLeft,
-            y = e.pageY - canvas.offsetTop;
-
-        var t = this;
-
-        if (t.ismousedown) {
+        if (this.ismousedown) {
             tempContext.lineCap = 'round';
-            pencilDrawHelper.line(tempContext, [t.prevX, t.prevY, x, y]);
-
-            points[points.length] = ['line', [t.prevX, t.prevY, x, y], pencilDrawHelper.getOptions()];
-
-            t.prevX = x;
-            t.prevY = y;
+            pencilDrawHelper.line(tempContext, [this.prevX, this.prevY, e.offsetX, e.offsetY]);
+            points[points.length] = ['line', [this.prevX, this.prevY, e.offsetX, e.offsetY], pencilDrawHelper.getOptions()];
+            this.prevX = e.offsetX;
+            this.prevY = e.offsetY;
         }
     }
 }

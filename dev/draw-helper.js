@@ -12,7 +12,6 @@ var drawHelper = {
             if (point && point.length && this[point[0]]) {
                 this[point[0]](context, point[1], point[2]);
             }
-            // else warn
         }
     },
     getOptions: function(opt) {
