@@ -49,6 +49,10 @@ function find(selector) {
     return document.getElementById(selector);
 }
 
+this.getAllPoints = function () {
+    return points;
+}
+
 var points = [],
     textarea = find('code-text'),
     lineWidth = 2,
@@ -63,9 +67,6 @@ var points = [],
 function getContext(id) {
     var canv = find(id),
         ctx = canv.getContext('2d');
-
-    console.log($('#webRTCBoard').width())
-    console.log($('#webRTCBoard').height())
     canv.setAttribute('width', $('#webRTCBoard').width());
     canv.setAttribute('height', $('#webRTCBoard').height());
 

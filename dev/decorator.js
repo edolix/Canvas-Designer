@@ -82,6 +82,10 @@ window.addEventListener('load', function() {
     }
 
     setSelection(firstMatch, window.selectedIcon);
+
+    if (typeof _opts.callbacks.onInit === 'function') {
+        _opts.callbacks.onInit()
+    }
 }, false);
 
 (function() {
