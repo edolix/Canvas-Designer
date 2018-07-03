@@ -3,6 +3,7 @@
 // it is used only to bring collaboration for canvas-surface
 var lastPointIndex = 0;
 var uid;
+
 function syncPoints(isSyncAll) {
     if (isSyncAll) {
         lastPointIndex = 0;

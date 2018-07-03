@@ -12,7 +12,8 @@ var arcHandler = {
     },
     mousedown: function(e) {
         var g = this.global;
-        var x = e.offsetX, y = e.offsetY;
+        var x = e.offsetX,
+            y = e.offsetY;
         g.prevX = x;
         g.prevY = y;
         g.ismousedown = true;
@@ -20,7 +21,8 @@ var arcHandler = {
     mouseup: function(e) {
         var g = this.global;
 
-        var x = e.offsetX, y = e.offsetY;
+        var x = e.offsetX,
+            y = e.offsetY;
 
         if (g.ismousedown) {
             if (!g.isCircleDrawn && g.isCircledEnded) {
@@ -44,7 +46,8 @@ var arcHandler = {
     mousemove: function(e) {
         var g = this.global;
 
-        var x = e.offsetX, y = e.offsetY;
+        var x = e.offsetX,
+            y = e.offsetY;
 
         var ismousedown = g.ismousedown,
             isCircleDrawn = g.isCircleDrawn,
@@ -66,7 +69,8 @@ var arcHandler = {
         var toFixed = this.toFixed;
 
         for (var i = 0; i < points.length; i++) {
-            var p = points[i], point;
+            var p = points[i],
+                point;
             if (p[0] === 'arc') {
                 point = p[1];
                 points[i] = ['arc', [toFixed(point[0]), toFixed(point[1]), toFixed(point[2]), toFixed(point[3]), point[4]], p[2]];
