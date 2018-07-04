@@ -46,6 +46,7 @@ var tools = {
 // }
 
 function setSelection(element, prop) {
+    console.log('setSelection', element, prop)
     endLastPath();
     hideContainers();
 
@@ -82,10 +83,6 @@ window.addEventListener('load', function() {
     }
 
     setSelection(firstMatch, window.selectedIcon);
-
-    if (typeof _opts.callbacks.onInit === 'function') {
-        _opts.callbacks.onInit()
-    }
 }, false);
 
 (function() {

@@ -49,8 +49,20 @@ function find(selector) {
     return document.getElementById(selector);
 }
 
-this.getAllPoints = function () {
+this.getAllPoints = function() {
     return points;
+}
+
+this.syncData = function(data) {
+    if (data.startIndex !== 0) {
+        for (var i = 0; i < data.points.length; i++) {
+            points[i + data.startIndex] = data.points[i];
+        }
+    } else {
+        points = data.points;
+    }
+    lastPointIndex = points.length;
+    drawHelper.redraw();
 }
 
 var points = [],
@@ -67,9 +79,6 @@ var points = [],
 function getContext(id) {
     var canv = find(id),
         ctx = canv.getContext('2d');
-    canv.setAttribute('width', $('#webRTCBoard').width());
-    canv.setAttribute('height', $('#webRTCBoard').height());
-
     ctx.lineWidth = lineWidth;
     ctx.strokeStyle = strokeStyle;
     ctx.fillStyle = fillStyle;
@@ -561,7 +570,6 @@ function endLastPath() {
     else if (cache.isQuadraticCurve) quadraticHandler.end();
     else if (cache.isBezierCurve) bezierHandler.end();
 
-    console.log('endLastPath ???')
     drawHelper.redraw();
 
     if (textHandler.text && textHandler.text.length) {
