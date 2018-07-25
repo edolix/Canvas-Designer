@@ -21,6 +21,7 @@ addEvent(canvas, isTouch ? 'touchstart mousedown' : 'mousedown', function(e) {
     else if (cache.isImage) imageHandler.mousedown(e);
     else if (cache.isArrow) arrowHandler.mousedown(e);
     else if (cache.isMarker) markerHandler.mousedown(e);
+    else if (cache.isEraseAll) eraseAllHandler.mousedown(e);
 
     drawHelper.redraw();
 
@@ -69,6 +70,7 @@ addEvent(canvas, isTouch ? 'touchend touchcancel mouseup' : 'mouseup', function(
     else if (cache.isImage) imageHandler.mouseup(e);
     else if (cache.isArrow) arrowHandler.mouseup(e);
     else if (cache.isMarker) markerHandler.mouseup(e);
+    else if (cache.isEraseAll) eraseAllHandler.mouseup(e);
 
     drawHelper.redraw();
 
@@ -97,6 +99,7 @@ addEvent(canvas, isTouch ? 'touchmove mousemove' : 'mousemove', function(e) {
     else if (cache.isImage) imageHandler.mousemove(e);
     else if (cache.isArrow) arrowHandler.mousemove(e);
     else if (cache.isMarker) markerHandler.mousemove(e);
+    else if (cache.isEraseAll) eraseAllHandler.mousemove(e);
 
     preventStopEvent(e);
 });

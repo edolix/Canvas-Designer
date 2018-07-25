@@ -36,6 +36,7 @@ var tools = {
     zoom: false, // FIXME
     additional: false,
     previewAndCode: false,
+    eraseAll: true
 };
 
 // if (params.tools) {
@@ -278,6 +279,22 @@ window.addEventListener('load', function() {
     if (tools.line === true) {
         decorateLine();
     } else document.getElementById('line').style.display = 'none';
+
+
+    function decorateEraseAll() {
+        var context = getContext('eraseAll');
+
+        context.fillStyle = 'Gray';
+        context.font = '9px Verdana';
+        context.fillText('Erase All', 16, 12);
+
+        bindEvent(context, 'eraseAllSelected');
+    }
+
+    if (tools.eraseAll === true) {
+        decorateEraseAll();
+    } else document.getElementById('eraseAll').style.display = 'none';
+
 
     function decorateArrow() {
         var context = getContext('arrow');

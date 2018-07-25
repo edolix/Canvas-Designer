@@ -1,4 +1,4 @@
-// Last time updated: 2018-07-04 11:58:03 AM UTC
+// Last time updated: 2018-07-25 11:03:44 PM UTC
 
 // _______________
 // Canvas-Designer
@@ -27,11 +27,12 @@ function WhiteBoard(options) {
         isEraser: false,
         isText: false,
         isImage: false,
+        isEraseAll: false,
 
         set: function(shape) {
             var cache = this;
 
-            cache.isLine = cache.isArrow = cache.isArc = cache.isDragLastPath = cache.isDragAllPaths = cache.isRectangle = cache.isQuadraticCurve = cache.isBezierCurve = cache.isPencil = cache.isMarker = cache.isEraser = cache.isText = cache.isImage = false;
+            cache.isEraseAll = cache.isLine = cache.isArrow = cache.isArc = cache.isDragLastPath = cache.isDragAllPaths = cache.isRectangle = cache.isQuadraticCurve = cache.isBezierCurve = cache.isPencil = cache.isMarker = cache.isEraser = cache.isText = cache.isImage = false;
             cache['is' + shape] = true;
         }
     };
@@ -821,6 +822,13 @@ function WhiteBoard(options) {
             context.beginPath();
             context.moveTo(point[0], point[1]);
             context.bezierCurveTo(point[2], point[3], point[4], point[5], point[6], point[7]);
+
+            this.handleOptions(context, options);
+        },
+        eraseAll: function(context, point, options) {
+            context.beginPath();
+            context.moveTo(point[0], point[1]);
+            // context.whateverYouWantToDoHere(point[2], point[3]);
 
             this.handleOptions(context, options);
         }
@@ -2301,6 +2309,7 @@ function WhiteBoard(options) {
         zoom: false, // FIXME
         additional: false,
         previewAndCode: false,
+        eraseAll: true
     };
 
     // if (params.tools) {
@@ -2543,6 +2552,22 @@ function WhiteBoard(options) {
         if (tools.line === true) {
             decorateLine();
         } else document.getElementById('line').style.display = 'none';
+
+
+        function decorateEraseAll() {
+            var context = getContext('eraseAll');
+
+            context.fillStyle = 'Gray';
+            context.font = '9px Verdana';
+            context.fillText('Erase All', 16, 12);
+
+            bindEvent(context, 'eraseAllSelected');
+        }
+
+        if (tools.eraseAll === true) {
+            decorateEraseAll();
+        } else document.getElementById('eraseAll').style.display = 'none';
+
 
         function decorateArrow() {
             var context = getContext('arrow');
@@ -3184,6 +3209,7 @@ function WhiteBoard(options) {
         else if (cache.isImage) imageHandler.mousedown(e);
         else if (cache.isArrow) arrowHandler.mousedown(e);
         else if (cache.isMarker) markerHandler.mousedown(e);
+        else if (cache.isEraseAll) eraseAllHandler.mousedown(e);
 
         drawHelper.redraw();
 
@@ -3232,6 +3258,7 @@ function WhiteBoard(options) {
         else if (cache.isImage) imageHandler.mouseup(e);
         else if (cache.isArrow) arrowHandler.mouseup(e);
         else if (cache.isMarker) markerHandler.mouseup(e);
+        else if (cache.isEraseAll) eraseAllHandler.mouseup(e);
 
         drawHelper.redraw();
 
@@ -3260,6 +3287,7 @@ function WhiteBoard(options) {
         else if (cache.isImage) imageHandler.mousemove(e);
         else if (cache.isArrow) arrowHandler.mousemove(e);
         else if (cache.isMarker) markerHandler.mousemove(e);
+        else if (cache.isEraseAll) eraseAllHandler.mousemove(e);
 
         preventStopEvent(e);
     });
@@ -3448,4 +3476,21 @@ function WhiteBoard(options) {
         }
     }
 
+    var eraseAllHandler = {
+        ismousedown: false,
+
+        mousedown: function(e) {
+            this.ismousedown = true;
+        },
+
+        mouseup: function(e) {
+            this.ismousedown = false;
+        },
+
+        mousemove: function(e) {
+            if (this.ismousedown) {
+                console.log('eraseAllHandler yo')
+            }
+        }
+    }
 }

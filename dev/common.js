@@ -16,11 +16,12 @@ var is = {
     isEraser: false,
     isText: false,
     isImage: false,
+    isEraseAll: false,
 
     set: function(shape) {
         var cache = this;
 
-        cache.isLine = cache.isArrow = cache.isArc = cache.isDragLastPath = cache.isDragAllPaths = cache.isRectangle = cache.isQuadraticCurve = cache.isBezierCurve = cache.isPencil = cache.isMarker = cache.isEraser = cache.isText = cache.isImage = false;
+        cache.isEraseAll = cache.isLine = cache.isArrow = cache.isArc = cache.isDragLastPath = cache.isDragAllPaths = cache.isRectangle = cache.isQuadraticCurve = cache.isBezierCurve = cache.isPencil = cache.isMarker = cache.isEraser = cache.isText = cache.isImage = false;
         cache['is' + shape] = true;
     }
 };
