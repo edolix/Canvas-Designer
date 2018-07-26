@@ -41,7 +41,6 @@ module.exports = function(grunt) {
                     'dev/decorator.js',
                     'dev/events-handler.js',
                     'dev/share-drawings.js',
-                    'dev/erase-all-handler.js',
                     // 'dev/webrtc-handler.js',
                     'dev/tail.js'
                 ],

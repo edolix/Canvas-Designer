@@ -47,7 +47,6 @@ var tools = {
 // }
 
 function setSelection(element, prop) {
-    console.log('setSelection', element, prop)
     endLastPath();
     hideContainers();
 
@@ -284,11 +283,32 @@ window.addEventListener('load', function() {
     function decorateEraseAll() {
         var context = getContext('eraseAll');
 
-        context.fillStyle = 'Gray';
-        context.font = '9px Verdana';
-        context.fillText('Erase All', 16, 12);
+        context.beginPath();
+        context.moveTo(10, 35);
+        context.lineTo(30, 15);
+        context.strokeStyle = '#ff0000'
+        context.stroke();
 
-        bindEvent(context, 'eraseAllSelected');
+        context.beginPath();
+        context.moveTo(10, 15);
+        context.lineTo(30, 35);
+        context.strokeStyle = '#ff0000'
+        context.stroke();
+
+        context.fillStyle = 'Gray';
+        context.font = '8px Verdana';
+        context.fillText('Erase', 10, 10);
+
+        addEvent(context.canvas, 'click', function (event) {
+            if (confirm('Do you want to cleanup the whiteboard?')) {
+                console.log('PD')
+                points = []
+                drawHelper.redraw()
+            }
+            event.preventDefault()
+        });
+
+        // bindEvent(context, 'eraseAllSelected');
     }
 
     if (tools.eraseAll === true) {
