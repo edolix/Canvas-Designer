@@ -299,7 +299,7 @@ window.addEventListener('load', function() {
         context.font = '8px Verdana';
         context.fillText('Erase', 10, 10);
 
-        addEvent(context.canvas, 'click', function (event) {
+        addEvent(context.canvas, 'click', function(event) {
             if (confirm('Do you want to cleanup the whiteboard?')) {
                 console.log('PD')
                 points = []
