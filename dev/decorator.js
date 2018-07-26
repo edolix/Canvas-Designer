@@ -36,6 +36,7 @@ var tools = {
     zoom: false, // FIXME
     additional: false,
     previewAndCode: false,
+    eraseAll: true
 };
 
 // if (params.tools) {
@@ -46,7 +47,6 @@ var tools = {
 // }
 
 function setSelection(element, prop) {
-    console.log('setSelection', element, prop)
     endLastPath();
     hideContainers();
 
@@ -278,6 +278,43 @@ window.addEventListener('load', function() {
     if (tools.line === true) {
         decorateLine();
     } else document.getElementById('line').style.display = 'none';
+
+
+    function decorateEraseAll() {
+        var context = getContext('eraseAll');
+
+        context.beginPath();
+        context.moveTo(10, 35);
+        context.lineTo(30, 15);
+        context.strokeStyle = '#ff0000'
+        context.stroke();
+
+        context.beginPath();
+        context.moveTo(10, 15);
+        context.lineTo(30, 35);
+        context.strokeStyle = '#ff0000'
+        context.stroke();
+
+        context.fillStyle = 'Gray';
+        context.font = '8px Verdana';
+        context.fillText('Erase', 10, 10);
+
+        addEvent(context.canvas, 'click', function (event) {
+            if (confirm('Do you want to cleanup the whiteboard?')) {
+                console.log('PD')
+                points = []
+                drawHelper.redraw()
+            }
+            event.preventDefault()
+        });
+
+        // bindEvent(context, 'eraseAllSelected');
+    }
+
+    if (tools.eraseAll === true) {
+        decorateEraseAll();
+    } else document.getElementById('eraseAll').style.display = 'none';
+
 
     function decorateArrow() {
         var context = getContext('arrow');
