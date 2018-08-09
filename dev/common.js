@@ -64,6 +64,11 @@ this.syncData = function(data) {
     }
     lastPointIndex = points.length;
     drawHelper.redraw();
+
+    setTimeout(function() {
+        drawHelper.redraw();
+        drawHelper.redraw();
+    }, 500);
 }
 
 var points = [],

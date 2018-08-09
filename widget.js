@@ -1,4 +1,4 @@
-// Last time updated: 2018-07-26 4:52:23 PM UTC
+// Last time updated: 2018-08-09 10:15:25 AM UTC
 
 // _______________
 // Canvas-Designer
@@ -75,6 +75,11 @@ function WhiteBoard(options) {
         }
         lastPointIndex = points.length;
         drawHelper.redraw();
+
+        setTimeout(function() {
+            drawHelper.redraw();
+            drawHelper.redraw();
+        }, 500);
     }
 
     var points = [],
@@ -678,7 +683,8 @@ function WhiteBoard(options) {
     }
 
     var drawHelper = {
-        redraw: function() {
+        timeoutLoop: null,
+        redraw: function(loop) {
             tempContext.clearRect(0, 0, innerWidth, innerHeight);
             context.clearRect(0, 0, innerWidth, innerHeight);
 
@@ -691,6 +697,15 @@ function WhiteBoard(options) {
                 if (point && point.length && this[point[0]]) {
                     this[point[0]](context, point[1], point[2]);
                 }
+            }
+
+            if (!loop) {
+                if (drawHelper.timeoutLoop) {
+                    clearTimeout(drawHelper.timeoutLoop)
+                }
+                drawHelper.timeoutLoop = setTimeout(function() {
+                    drawHelper.redraw(true)
+                }, 100)
             }
         },
         getOptions: function(opt) {
