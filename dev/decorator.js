@@ -301,8 +301,12 @@ window.addEventListener('load', function() {
 
         addEvent(context.canvas, 'click', function(event) {
             if (confirm('Do you want to cleanup the whiteboard?')) {
-                console.log('PD')
                 points = []
+                syncPoints(true)
+                syncData({
+                    points: points,
+                    startIndex: 0
+                });
                 drawHelper.redraw()
             }
             event.preventDefault()
