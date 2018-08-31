@@ -1,4 +1,4 @@
-// Last time updated: 2018-08-09 10:15:25 AM UTC
+// Last time updated: 2018-08-31 8:30:00 AM UTC
 
 // _______________
 // Canvas-Designer
@@ -75,11 +75,6 @@ function WhiteBoard(options) {
         }
         lastPointIndex = points.length;
         drawHelper.redraw();
-
-        setTimeout(function() {
-            drawHelper.redraw();
-            drawHelper.redraw();
-        }, 500);
     }
 
     var points = [],
@@ -2582,8 +2577,12 @@ function WhiteBoard(options) {
 
             addEvent(context.canvas, 'click', function(event) {
                 if (confirm('Do you want to cleanup the whiteboard?')) {
-                    console.log('PD')
                     points = []
+                    syncPoints(true)
+                    syncData({
+                        points: points,
+                        startIndex: 0
+                    });
                     drawHelper.redraw()
                 }
                 event.preventDefault()

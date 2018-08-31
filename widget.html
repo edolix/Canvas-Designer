@@ -743,6 +743,7 @@
 
     <!-- url-parameters -->
     <script>
+        var _whiteBoard = null;
         (function() {
             var params = {},
                 r = /([^&=]+)=?([^&]*)/g;
@@ -773,6 +774,26 @@
         var script = document.createElement('script');
         script.src = params.widgetJsURL || 'https://cdn.webrtc-experiment.com/Canvas-Designer/widget.js';
         (document.body || document.documentElement).appendChild(script);
+
+        var DEBUG = false;
+        if (DEBUG) {
+            window.onload = function () {
+                _whiteBoard = new WhiteBoard({
+                    callbacks: {
+                        syncData: function () {
+                            if (_whiteBoard.xhrPoints) {
+                                _whiteBoard.xhrPoints.abort()
+                            }
+                            var data = { points: JSON.stringify(_whiteBoard.getAllPoints()) }
+                            console.log('SyncData', data)
+                            // if (typeof $saveBoardPointsPath === 'string') {
+                            //     _whiteBoard.xhrPoints = $.post($saveBoardPointsPath, data, 'json')
+                            // }
+                        }
+                    }
+                })
+            }
+        }
     </script>
 </body>
 
