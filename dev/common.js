@@ -54,6 +54,10 @@ this.getAllPoints = function() {
     return points;
 }
 
+this.ping = function() {
+    drawHelper.redraw();
+};
+
 this.syncData = function(data) {
     if (data.startIndex !== 0) {
         for (var i = 0; i < data.points.length; i++) {

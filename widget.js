@@ -1,4 +1,4 @@
-// Last time updated: 2018-08-31 8:30:00 AM UTC
+// Last time updated: 2019-03-25 11:09:41 AM UTC
 
 // _______________
 // Canvas-Designer
@@ -64,6 +64,10 @@ function WhiteBoard(options) {
     this.getAllPoints = function() {
         return points;
     }
+
+    this.ping = function() {
+        drawHelper.redraw();
+    };
 
     this.syncData = function(data) {
         if (data.startIndex !== 0) {
